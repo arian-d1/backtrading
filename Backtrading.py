@@ -5,7 +5,7 @@ import matplotlib
 from Strategies.MACDCrossover import MACDCrossover
 
 
-file = 'Data\SPY_data.csv'
+file = 'Data\SPY_data_5m.csv'
 df = pd.read_csv(file, parse_dates=['Date'], index_col='Date')
 
 data = bt.feeds.PandasData(dataname = df)
