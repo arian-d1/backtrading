@@ -24,7 +24,6 @@ def runMACD(ticker, cerebro):
 
 def runPairs(ticker1, ticker2, cerebro):
 
-
     file1 = getTickerData(ticker1, 365)
     df1 = pd.read_csv(file1, parse_dates=['Date'], index_col='Date')
     data1 = bt.feeds.PandasData(dataname = df1)
@@ -64,7 +63,7 @@ def main(arg, tickers):
     # Initialize start conditions
     STARTCASH = 1_000_000
     cerebro.broker.setcash(STARTCASH)
-    cerebro.addsizer(bt.sizers.FixedSize, stake = 100)
+    cerebro.addsizer(bt.sizers.FixedSize, stake=500)
 
     cerebro.addanalyzer(bt.analyzers.SharpeRatio)
     cerebro.addanalyzer(bt.analyzers.Returns)
@@ -79,9 +78,11 @@ def main(arg, tickers):
             runPairs(tickers[0], tickers[1], cerebro)
         except IndexError:
             print("User must specify only 2 tickers to use the pairs method")
+    else:
+        print("No matching strategy found")
 
 if __name__ == "__main__":
-    if len(sys.argv) == 3 or len(sys.argv) ==4:
+    if len(sys.argv) == 3 or len(sys.argv) == 4:
         main(sys.argv[1], sys.argv[2::])
     else:
         print("Incorrent usage, try one of: ")
