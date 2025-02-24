@@ -1,20 +1,22 @@
 import yfinance as yf
 import datetime
 
-# Define the ticker symbol
-ticker = 'SPY'
+def getTickerData(ticker, period):
+    # Get today's dte
+    endDate = datetime.datetime.now().date()
 
-# Get today's date
-end_date = datetime.datetime.now().date()
+    # Calculate the start date (one year ago)
+    startDate = endDate - datetime.timedelta(days=period)
 
-# Calculate the start date (one year ago)
-start_date = end_date - datetime.timedelta(days=365)
+    # Download the data
+    data = yf.download(ticker, start=startDate, end=endDate, interval='1d')
 
-# Download the data
-data = yf.download(ticker, start=start_date, end=end_date, interval='1d')
+    data.columns = ["Open", "High", "Low", "Close", "Volume"]
 
-# Save to CSV
-file_name = "SPY_data_365d.csv"
-data.to_csv(file_name)
+    # Save to CSV
+    fileName = f"./data/{ticker}_data_{period}d.csv"
+    data.to_csv(fileName)
 
-print(f"Data saved to {file_name}")
+    print(f"Data saved to {fileName}")
+
+    return fileName
