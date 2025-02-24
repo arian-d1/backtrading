@@ -7,11 +7,10 @@ trading and managing/hedging risk.
 
 
 ## Usage: 
-
 ~~~
-python .\Backtrading.py MACD "Ticker 1" 
+python .\Backtrading.py MACD Period "Ticker 1" 
 
 or
 
-python .\Backtrading.py Pairs "Ticker 1" "Ticker 2"
+python .\Backtrading.py Pairs Period "Ticker 1" "Ticker 2"
 ~~~
